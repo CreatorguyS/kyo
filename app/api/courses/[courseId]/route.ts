@@ -3,10 +3,17 @@ import { NextResponse } from "next/server";
 import { db } from "@/lib/db";
 import Mux from "@mux/mux-node";
 
-const mux = new Mux({
-  tokenId: process.env.MUX_TOKEN_ID!,
-  tokenSecret: process.env.MUX_TOKEN_SECRET!
-});
+// Guard Mux initialization so missing env vars don't crash the app in development.
+let mux: any = null;
+if (process.env.MUX_TOKEN_ID && process.env.MUX_TOKEN_SECRET) {
+    mux = new Mux({
+        tokenId: process.env.MUX_TOKEN_ID,
+        tokenSecret: process.env.MUX_TOKEN_SECRET,
+    });
+} else {
+    // eslint-disable-next-line no-console
+    console.warn("MUX_TOKEN_ID or MUX_TOKEN_SECRET not set; mux operations will be skipped.");
+}
 
 export async function DELETE(
     req:Request,
@@ -40,8 +47,14 @@ export async function DELETE(
         };
 
         for (const chapter of course.chapters){
-            if(chapter.muxData?.assetId){
-                await mux.video.assets.delete(chapter.muxData.assetId);
+            if (mux && chapter.muxData?.assetId) {
+                try {
+                    await mux.video.assets.delete(chapter.muxData.assetId);
+                } catch (e) {
+                    // log and continue
+                    // eslint-disable-next-line no-console
+                    console.warn("Failed to delete mux asset", chapter.muxData?.assetId, e);
+                }
             }
         }
 

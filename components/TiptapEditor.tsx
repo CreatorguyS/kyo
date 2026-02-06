@@ -21,7 +21,7 @@ export const TiptapEditor: React.FC<TiptapEditorProps> = ({ value, onChange }) =
       Link.configure({
         openOnClick: false,
         HTMLAttributes: {
-          class: "text-blue-500 hover:underline",
+          class: \"text-purple-600 dark:text-purple-400 hover:underline\",
         },
         validate: href => /^https?:\/\//.test(href),
       }),
@@ -48,11 +48,11 @@ export const TiptapEditor: React.FC<TiptapEditorProps> = ({ value, onChange }) =
   });
 
   if (!editor) {
-    return <div className="border rounded-lg p-4 bg-white dark:bg-slate-800">Loading editor...</div>;
+    return <div className="border rounded-lg p-4 bg-white dark:bg-slate-800 border-purple-200 dark:border-purple-900/50">Loading editor...</div>;
   }
 
   return (
-    <div className="border border-gray-300 rounded-lg overflow-hidden bg-white dark:bg-slate-800 shadow-sm">
+    <div className="border border-purple-300 dark:border-purple-700 rounded-lg overflow-hidden bg-white dark:bg-slate-800 shadow-sm">
       {/* Toolbar */}
       <div className="flex flex-wrap items-center gap-1 p-2 border-b border-gray-200 dark:border-slate-700 bg-gray-50 dark:bg-slate-700">
         <button

@@ -1,5 +1,5 @@
-🌩️ Cloud Class – Full-Stack LMS Web Application
-Cloud Class is a modern, full-featured Learning Management System (LMS) built with the latest full-stack technologies. Designed for both learners and instructors, it provides a complete platform to browse, purchase, and manage online courses.
+🌩️ KYO (Know Your Output) – Full-Stack LMS Web Application
+KYO is a modern, full-featured Learning Management System (LMS) built with the latest full-stack technologies. Designed for both learners and instructors, it provides a complete platform to browse, purchase, and manage online courses.
 
 🔑 Key Features
 

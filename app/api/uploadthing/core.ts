@@ -23,13 +23,19 @@ export const ourFileRouter = {
             console.log("Course image upload complete for userId:", metadata.userId);
             console.log("file url", file.ufsUrl);
         }),
-    courseAttachment: f(["text", "image", "video", "audio", "pdf"])
+    courseAttachment: f({
+        text: { maxFileSize: "16MB", maxFileCount: 1 },
+        image: { maxFileSize: "16MB", maxFileCount: 1 },
+        video: { maxFileSize: "512MB", maxFileCount: 1 },
+        audio: { maxFileSize: "64MB", maxFileCount: 1 },
+        pdf: { maxFileSize: "64MB", maxFileCount: 1 },
+    })
         .middleware(async () => await handleAuth())
         .onUploadComplete(async ({ metadata, file }) => {
             console.log("Course attachment upload complete for userId:", metadata.userId);
             console.log("file url", file.ufsUrl);
         }),
-    chapterVideo: f({ video: { maxFileCount: 1, maxFileSize: "512GB" } })
+    chapterVideo: f({ video: { maxFileCount: 1, maxFileSize: "512MB" } })
         .middleware(async () => await handleAuth())
         .onUploadComplete(async ({ metadata, file }) => {
             console.log("Chapter video upload complete for userId:", metadata.userId);

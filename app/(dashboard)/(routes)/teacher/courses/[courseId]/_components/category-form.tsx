@@ -1,32 +1,30 @@
 "use client";
 
 import * as z from "zod";
-import { zodResolver } from "@hookform/resolvers/zod";
-import { Course } from "@/lib/generated/prisma";
 import axios from "axios";
+import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
-import { Button } from "@/components/ui/button";
 import { Pencil } from "lucide-react";
+import { useState } from "react";
+import toast from "react-hot-toast";
+import { useRouter } from "next/navigation";
+// import { Course } from "@prisma/client"; // Ensure this matches your Prisma path
 
 import {
     Form,
     FormControl,
     FormField,
     FormItem,
-    FormLabel,
     FormMessage,
 } from "@/components/ui/form";
-import { useState } from "react";
-import toast from "react-hot-toast";
-import { useRouter } from "next/navigation";
+import { Button } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
 import { Combobox } from "@/components/ui/combobox";
-
 
 interface CategoryFormProps {
     initialData: Course;
     courseId: string;
-    options: {label: string; value:string}[];
+    options: { label: string; value: string }[];
 }
 
 const formSchema = z.object({
@@ -43,12 +41,11 @@ export const CategoryForm = ({
     const router = useRouter();
 
     const form = useForm<z.infer<typeof formSchema>>({
-    resolver: zodResolver(formSchema),
-    defaultValues: {
-        categoryId: initialData.categoryId ?? "",
-    },
-});
-
+        resolver: zodResolver(formSchema),
+        defaultValues: {
+            categoryId: initialData?.categoryId || "",
+        },
+    });
 
     const { isSubmitting, isValid } = form.formState;
 
@@ -63,13 +60,19 @@ export const CategoryForm = ({
         }
     };
 
-    const selectedOption = options.find((option)=> option.value === initialData.categoryId);
+    const selectedOption = options.find((option) => option.value === initialData.categoryId);
+    const hasOptions = Array.isArray(options) && options.length > 0;
 
     return (
-        <div className="mt-6 border bg-slate-100 rounded-md p-4">
+        <div className="mt-6 border bg-purple-50 dark:bg-slate-800 rounded-md p-4 border-purple-200 dark:border-purple-900/50">
             <div className="font-medium flex items-center justify-between">
-                Course Category
-                <Button onClick={toggleEdit} variant={"ghost"}>
+                <div className="flex items-center gap-x-2">
+                    <span>Course Category</span>
+                    {!hasOptions && (
+                        <span className="text-sm text-red-500 italic">(Missing Categories)</span>
+                    )}
+                </div>
+                <Button onClick={toggleEdit} variant="ghost">
                     {isEditing ? (
                         <>Cancel</>
                     ) : (
@@ -86,23 +89,26 @@ export const CategoryForm = ({
                     "text-sm mt-2",
                     !initialData.categoryId && "text-slate-500 italic"
                 )}>
-                    {selectedOption?.label || "No Category"}</p>
+                    {selectedOption?.label || "No Category"}
+                </p>
             )}
 
             {isEditing && (
                 <Form {...form}>
-                    <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-4 mt-4">
+                    <form
+                        onSubmit={form.handleSubmit(onSubmit)}
+                        className="space-y-4 mt-4"
+                    >
                         <FormField
                             control={form.control}
                             name="categoryId"
                             render={({ field }) => (
                                 <FormItem>
-                                    <FormLabel>Category</FormLabel>
                                     <FormControl>
-                                       <Combobox
-                                        options={options}
-                                        {...field}
-                                       />
+                                        <Combobox
+                                            options={...options}
+                                            {...field}
+                                        />
                                     </FormControl>
                                     <FormMessage />
                                 </FormItem>
@@ -110,14 +116,20 @@ export const CategoryForm = ({
                         />
                         <div className="flex items-center gap-x-2">
                             <Button
+                                disabled={!isValid || isSubmitting}
                                 type="submit"
-                                disabled={isSubmitting || !isValid}
                             >
                                 Save
                             </Button>
                         </div>
                     </form>
                 </Form>
+            )}
+            
+            {isEditing && !hasOptions && (
+                <div className="mt-4 text-xs text-muted-foreground">
+                    Tip: Run <code>node scripts/seed.cjs</code> to populate categories.
+                </div>
             )}
         </div>
     );

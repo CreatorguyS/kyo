@@ -21,17 +21,17 @@ export const NavbarRoutes =() => {
                 <SearchInput />
             </div>
         )}
-            <div className="flex gap-x-2 ml-auto">
+            <div className="flex gap-x-2 ml-auto items-center">
             {isTeacherPage || isPlayerPage ? (
                 <Link href="/">
-                <Button size="sm" variant="ghost">
+                <Button size="sm" className="bg-purple-600 hover:bg-purple-700 text-white transition-colors">
                     <LogOut className="h-4 w-4 mr-2" />
                     Exit
                 </Button>
                 </Link>
             ) : (
                 <Link href="/teacher/courses">
-                <Button size="sm" variant="ghost">
+                <Button size="sm" className="bg-purple-600 hover:bg-purple-700 text-white transition-colors">
                     Teacher Mode
                 </Button>
                 </Link>

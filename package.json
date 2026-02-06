@@ -1,5 +1,5 @@
 {
-  "name": "cloud-class",
+  "name": "kyo",
   "version": "0.1.0",
   "private": true,
   "scripts": {
@@ -16,7 +16,7 @@
     "@hookform/resolvers": "^5.0.1",
     "@mux/mux-node": "^11.1.0",
     "@mux/mux-player-react": "^3.4.0",
-    "@prisma/client": "^6.8.2",
+    "@prisma/client": "^6.19.2",
     "@radix-ui/react-alert-dialog": "^1.1.14",
     "@radix-ui/react-checkbox": "^1.3.2",
     "@radix-ui/react-dialog": "^1.1.14",
@@ -72,7 +72,7 @@
     "@types/react-dom": "^19",
     "eslint": "^9",
     "eslint-config-next": "15.3.3",
-    "prisma": "^6.8.2",
+    "prisma": "^6.19.2",
     "tailwindcss": "^4",
     "ts-node": "^10.9.2",
     "tsx": "^4.19.4",

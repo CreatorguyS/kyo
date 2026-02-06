@@ -14,7 +14,7 @@ export const FileUpload = ({
   endpoint,
 }: FileUploadProps) => {
   return (
-    <div className="border border-dashed border-gray-300 dark:border-gray-600 p-4 rounded-md bg-white dark:bg-gray-900">
+    <div className="border border-dashed border-purple-300 dark:border-purple-700 p-4 rounded-md bg-white dark:bg-slate-800">
       <UploadDropzone
         endpoint={endpoint}
         onClientUploadComplete={(res) => {

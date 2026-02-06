@@ -8,8 +8,8 @@ const bannerVariants = cva(
   {
     variants: {
       variant: {
-        warning: "bg-yellow-200/80 border-yellow-30 text-primary dark:bg-yellow-500/80 dark:border-yellow-400 dark:text-primary",
-        success: "bg-emerald-700 border-emerald-800 text-secondary dark:bg-emerald-600 dark:border-emerald-700 dark:text-secondary",
+        warning: "bg-purple-100/80 border-purple-300 text-purple-900 dark:bg-purple-500/80 dark:border-purple-600 dark:text-white",
+        success: "bg-emerald-700 border-emerald-800 text-white dark:bg-emerald-600 dark:border-emerald-700 dark:text-white",
       }
     },
     defaultVariants: {

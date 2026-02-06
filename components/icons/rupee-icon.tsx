@@ -7,7 +7,7 @@ const CustomRupeeIcon = () => {
     <span
       aria-label="rupee"
       role="img"
-      className="text-blue-600 font-bold text-lg select-none"
+      className="text-purple-600 dark:text-purple-400 font-bold text-lg select-none"
     >
       ₹
     </span>
