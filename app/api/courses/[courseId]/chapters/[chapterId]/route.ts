@@ -32,7 +32,7 @@ export async function DELETE(
       return new NextResponse("Unauthorized", { status: 401 });
     }
 
-    const chapter = await db.chapter.findUnique({
+    const chapter = await db.chapter.findFirst({
       where: {
         id: chapterId,
         courseId: courseId,
@@ -120,7 +120,6 @@ export async function PATCH(
     const chapter = await db.chapter.update({
       where: {
         id: chapterId,
-        courseId
       },
       data: {
         ...values

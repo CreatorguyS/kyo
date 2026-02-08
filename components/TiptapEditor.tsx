@@ -21,7 +21,7 @@ export const TiptapEditor: React.FC<TiptapEditorProps> = ({ value, onChange }) =
       Link.configure({
         openOnClick: false,
         HTMLAttributes: {
-          class: \"text-purple-600 dark:text-purple-400 hover:underline\",
+          class: "text-purple-600 dark:text-purple-400 hover:underline",
         },
         validate: href => /^https?:\/\//.test(href),
       }),
