@@ -8,7 +8,7 @@ import { Pencil } from "lucide-react";
 import { useState } from "react";
 import toast from "react-hot-toast";
 import { useRouter } from "next/navigation";
-// import { Course } from "@prisma/client"; // Ensure this matches your Prisma path
+import { Course } from "@/lib/generated/prisma";
 
 import {
     Form,
@@ -106,7 +106,7 @@ export const CategoryForm = ({
                                 <FormItem>
                                     <FormControl>
                                         <Combobox
-                                            options={...options}
+                                            options={options}
                                             {...field}
                                         />
                                     </FormControl>
@@ -125,7 +125,7 @@ export const CategoryForm = ({
                     </form>
                 </Form>
             )}
-            
+
             {isEditing && !hasOptions && (
                 <div className="mt-4 text-xs text-muted-foreground">
                     Tip: Run <code>node scripts/seed.cjs</code> to populate categories.
